@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { Plus, Trash2, Mail, Phone, Store } from 'lucide-react';
+import AddBuyerForm from '../components/AddBuyerForm';
 
 export default function Buyers() {
   const [buyers, setBuyers] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [showAddModal, setShowAddModal] = useState(false);
 
   const fetchBuyers = async () => {
     try {
@@ -36,7 +38,7 @@ export default function Buyers() {
     <div className="fade-in">
       <div className="page-header">
         <h1 className="page-title">Buyers</h1>
-        <button className="btn-primary">
+        <button className="btn-primary" onClick={() => setShowAddModal(true)}>
           <Plus size={18} />
           Add Buyer
         </button>
@@ -100,6 +102,15 @@ export default function Buyers() {
           </table>
         )}
       </div>
+
+      <AddBuyerForm
+        isOpen={showAddModal}
+        onClose={() => setShowAddModal(false)}
+        onSubmit={(data) => {
+          console.log('New buyer:', data);
+          setShowAddModal(false);
+        }}
+      />
     </div>
   );
 }

@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { Plus, Trash2, Mail, Phone } from 'lucide-react';
+import AddSupplierForm from '../components/AddSupplierForm';
 
 export default function Suppliers() {
   const [suppliers, setSuppliers] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [showAddModal, setShowAddModal] = useState(false);
 
   const fetchSuppliers = async () => {
     try {
@@ -36,7 +38,7 @@ export default function Suppliers() {
     <div className="fade-in">
       <div className="page-header">
         <h1 className="page-title">Suppliers</h1>
-        <button className="btn-primary">
+        <button className="btn-primary" onClick={() => setShowAddModal(true)}>
           <Plus size={18} />
           Add Supplier
         </button>
@@ -90,6 +92,15 @@ export default function Suppliers() {
           </table>
         )}
       </div>
+
+      <AddSupplierForm
+        isOpen={showAddModal}
+        onClose={() => setShowAddModal(false)}
+        onSubmit={(data) => {
+          console.log('New supplier:', data);
+          setShowAddModal(false);
+        }}
+      />
     </div>
   );
 }

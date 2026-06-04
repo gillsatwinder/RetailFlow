@@ -6,6 +6,7 @@ import Dashboard from './pages/Dashboard';
 import Products from './pages/Products';
 import Suppliers from './pages/Suppliers';
 import Buyers from './pages/Buyers';
+import Orders from './pages/Orders';
 
 import './App.css';
 
@@ -22,6 +23,7 @@ function App() {
               <Route path="/products" element={<Products />} />
               <Route path="/suppliers" element={<Suppliers />} />
               <Route path="/buyers" element={<Buyers />} />
+              <Route path="/orders" element={<Orders />} />
             </Routes>
           </div>
         </main>
