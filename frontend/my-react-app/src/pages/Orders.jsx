@@ -1,22 +1,15 @@
-import React from 'react';
-import { Plus, Trash2, ShoppingBag } from 'lucide-react';
+import React, { useState, useEffect } from 'react';
+import { Plus, Trash2 } from 'lucide-react';
+import AddOrderForm from '../components/AddOrderForm';
 import './Orders.css';
-
-const MOCK_ORDERS = [
-  { id: 1, buyer_name: 'TechMart Electronics', order_date: '2026-05-28', status: 'completed', items_count: 3, total_amount: 2450.00 },
-  { id: 2, buyer_name: 'GreenLeaf Grocers', order_date: '2026-05-30', status: 'completed', items_count: 5, total_amount: 1890.50 },
-  { id: 3, buyer_name: 'StyleHub Fashion', order_date: '2026-06-01', status: 'pending', items_count: 2, total_amount: 3200.00 },
-  { id: 4, buyer_name: 'HomeBase Supplies', order_date: '2026-06-01', status: 'pending', items_count: 4, total_amount: 980.75 },
-  { id: 5, buyer_name: 'SportZone Outlet', order_date: '2026-06-02', status: 'cancelled', items_count: 1, total_amount: 540.00 },
-  { id: 6, buyer_name: 'TechMart Electronics', order_date: '2026-06-02', status: 'pending', items_count: 6, total_amount: 4100.25 },
-];
 
 function formatOrderId(id) {
   return `#ORD-${String(id).padStart(3, '0')}`;
 }
 
 function formatDate(dateStr) {
-  const date = new Date(dateStr + 'T00:00:00');
+  if (!dateStr) return 'N/A';
+  const date = new Date(dateStr);
   return date.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
 }
 
@@ -34,12 +27,61 @@ function getStatusBadgeClass(status) {
 }
 
 export default function Orders() {
-  const orders = MOCK_ORDERS;
-  const loading = false;
+  const [orders, setOrders] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [showAddModal, setShowAddModal] = useState(false);
 
-  const handleDelete = (id) => {
-    if (window.confirm('Are you sure you want to delete this order?')) {
-      console.log('Delete order:', id);
+  const fetchOrders = async () => {
+    try {
+      const res = await fetch('http://localhost:8000/orders/');
+      const data = await res.json();
+      setOrders(data);
+    } catch (error) {
+      console.error("Failed to fetch orders", error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    fetchOrders();
+  }, []);
+
+  const handleDelete = async (id) => {
+    if (window.confirm('Are you sure you want to delete this order? (This will restore item stock levels)')) {
+      try {
+        const res = await fetch(`http://localhost:8000/orders/${id}`, { method: 'DELETE' });
+        if (res.ok) {
+          fetchOrders();
+        } else {
+          const errData = await res.json();
+          alert(`Failed to delete order: ${errData.detail || 'Unknown error'}`);
+        }
+      } catch (err) {
+        console.error(err);
+      }
+    }
+  };
+
+  const handleAddOrder = async (orderData) => {
+    try {
+      const res = await fetch('http://localhost:8000/orders/', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(orderData),
+      });
+
+      if (res.ok) {
+        fetchOrders();
+        setShowAddModal(false);
+      } else {
+        const errData = await res.json();
+        alert(`Failed to create order: ${errData.detail || 'Unknown error'}`);
+      }
+    } catch (err) {
+      console.error("Failed to create order", err);
     }
   };
 
@@ -47,7 +89,7 @@ export default function Orders() {
     <div className="fade-in">
       <div className="page-header">
         <h1 className="page-title">Orders</h1>
-        <button className="btn-primary">
+        <button className="btn-primary" onClick={() => setShowAddModal(true)}>
           <Plus size={18} />
           Add Order
         </button>
@@ -97,6 +139,13 @@ export default function Orders() {
           </table>
         )}
       </div>
+
+      <AddOrderForm
+        isOpen={showAddModal}
+        onClose={() => setShowAddModal(false)}
+        onSubmit={handleAddOrder}
+      />
     </div>
   );
 }
+

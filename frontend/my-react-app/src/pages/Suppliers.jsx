@@ -96,11 +96,26 @@ export default function Suppliers() {
       <AddSupplierForm
         isOpen={showAddModal}
         onClose={() => setShowAddModal(false)}
-        onSubmit={(data) => {
-          console.log('New supplier:', data);
-          setShowAddModal(false);
+        onSubmit={async (data) => {
+          try {
+            const res = await fetch('http://localhost:8000/suppliers/', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify(data)
+            });
+            if (res.ok) {
+              fetchSuppliers();
+              setShowAddModal(false);
+            } else {
+              const err = await res.json();
+              alert(`Error: ${err.detail || 'Could not add supplier'}`);
+            }
+          } catch (error) {
+            console.error("Failed to add supplier", error);
+          }
         }}
       />
     </div>
   );
 }
+

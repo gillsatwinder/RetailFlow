@@ -106,11 +106,32 @@ export default function Buyers() {
       <AddBuyerForm
         isOpen={showAddModal}
         onClose={() => setShowAddModal(false)}
-        onSubmit={(data) => {
-          console.log('New buyer:', data);
-          setShowAddModal(false);
+        onSubmit={async (data) => {
+          try {
+            // Map form fields to schema
+            const payload = {
+              ...data,
+              credit_limit: parseFloat(data.credit_limit || 0),
+              account_status: 'active', // default status
+            };
+            const res = await fetch('http://localhost:8000/buyers/', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify(payload)
+            });
+            if (res.ok) {
+              fetchBuyers();
+              setShowAddModal(false);
+            } else {
+              const err = await res.json();
+              alert(`Error: ${err.detail || 'Could not add buyer'}`);
+            }
+          } catch (error) {
+            console.error("Failed to add buyer", error);
+          }
         }}
       />
     </div>
   );
 }
+
