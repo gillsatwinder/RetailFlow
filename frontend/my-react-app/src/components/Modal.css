@@ -4,7 +4,7 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background: rgba(0, 0, 0, 0.6);
+  background: rgba(15, 23, 42, 0.4);
   backdrop-filter: blur(4px);
   -webkit-backdrop-filter: blur(4px);
   display: flex;
@@ -24,14 +24,14 @@
 }
 
 .modal-content {
-  background: rgba(15, 23, 42, 0.95);
+  background: #ffffff;
   border: 1px solid var(--border-color);
   border-radius: 16px;
   width: 90%;
   max-width: 560px;
   max-height: 85vh;
   overflow-y: auto;
-  box-shadow: var(--glass-shadow);
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
   animation: modalSlideUp 0.25s ease-out;
 }
 
@@ -68,15 +68,15 @@
   width: 32px;
   height: 32px;
   border-radius: 8px;
-  border: none;
-  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--border-color);
+  background: #ffffff;
   color: var(--text-secondary);
   cursor: pointer;
   transition: all 0.2s;
 }
 
 .modal-close:hover {
-  background: rgba(255, 255, 255, 0.1);
+  background: var(--bg-app);
   color: var(--text-primary);
 }
 

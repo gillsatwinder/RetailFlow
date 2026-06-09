@@ -3,8 +3,7 @@
   justify-content: space-between;
   align-items: center;
   padding: 16px 32px;
-  background-color: rgba(15, 23, 42, 0.8);
-  backdrop-filter: blur(12px);
+  background-color: var(--bg-card);
   border-bottom: 1px solid var(--border-color);
   position: sticky;
   top: 0;
@@ -14,7 +13,7 @@
 .search-bar {
   display: flex;
   align-items: center;
-  background: rgba(255, 255, 255, 0.05);
+  background: var(--bg-app);
   border: 1px solid var(--border-color);
   border-radius: 8px;
   padding: 8px 16px;
@@ -24,7 +23,8 @@
 
 .search-bar:focus-within {
   border-color: var(--accent-blue);
-  background: rgba(255, 255, 255, 0.08);
+  background: #ffffff;
+  box-shadow: 0 0 0 2px rgba(79, 70, 229, 0.15);
 }
 
 .search-icon {
@@ -56,27 +56,32 @@
   align-items: center;
   gap: 12px;
   cursor: pointer;
-  padding: 4px 8px;
+  padding: 6px 12px;
   border-radius: 8px;
   transition: background 0.2s ease;
+  border: 1px solid var(--border-color);
+  background: #ffffff;
 }
 
 .user-profile:hover {
-  background: rgba(255, 255, 255, 0.05);
+  background: var(--bg-app);
 }
 
 .avatar {
-  width: 36px;
-  height: 36px;
+  width: 30px;
+  height: 30px;
   background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple));
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
   color: white;
+  font-size: 12px;
+  font-weight: 600;
 }
 
 .user-name {
   font-weight: 500;
   font-size: 14px;
+  color: var(--text-primary);
 }

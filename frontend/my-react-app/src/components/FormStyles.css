@@ -13,23 +13,24 @@
 .form-input {
   width: 100%;
   padding: 10px 14px;
-  background: rgba(0, 0, 0, 0.3);
+  background: #ffffff;
   border: 1px solid var(--border-color);
   border-radius: 8px;
   color: var(--text-primary);
   font-size: 14px;
   font-family: inherit;
   outline: none;
-  transition: border-color 0.2s;
+  transition: all 0.2s;
   box-sizing: border-box;
 }
 
 .form-input:focus {
   border-color: var(--accent-blue);
+  box-shadow: 0 0 0 2px rgba(79, 70, 229, 0.15);
 }
 
 .form-input::placeholder {
-  color: rgba(148, 163, 184, 0.5);
+  color: #94a3b8;
 }
 
 .form-row {
@@ -55,10 +56,10 @@
   align-items: center;
   gap: 8px;
   padding: 10px 20px;
-  background: rgba(255, 255, 255, 0.05);
+  background: #ffffff;
   color: var(--text-secondary);
   border: 1px solid var(--border-color);
-  border-radius: 10px;
+  border-radius: 8px;
   font-size: 14px;
   font-weight: 500;
   font-family: inherit;
@@ -67,7 +68,7 @@
 }
 
 .btn-secondary:hover {
-  background: rgba(255, 255, 255, 0.1);
+  background: var(--bg-app);
   color: var(--text-primary);
 }
 
@@ -84,6 +85,6 @@ select.form-input {
 }
 
 select.form-input option {
-  background: #0f172a;
+  background: #ffffff;
   color: var(--text-primary);
 }

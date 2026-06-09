@@ -20,7 +20,7 @@ Base.metadata.create_all(bind=engine)
 
 # Create the FastAPI app
 app = FastAPI(
-    title="RetailFlow AI",
+    title="Supply Desk",
     description="Retail inventory, sales, and supply chain management API",
     version="1.0.0"
 )
@@ -48,4 +48,4 @@ app.include_router(analytics_router)
 
 @app.get("/")
 def home():
-    return {"message": "RetailFlow AI Backend Running"}
+    return {"message": " Backend Running"}

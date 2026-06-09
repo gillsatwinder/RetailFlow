@@ -1,22 +1,22 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
 
 :root {
-  /* Color Palette */
-  --bg-app: #020617; /* Very dark slate */
-  --bg-sidebar: #0f172a; /* Dark slate */
-  --bg-card: rgba(30, 41, 59, 0.7); /* Glassy card */
-  --border-color: #334155;
-  --text-primary: #f8fafc;
-  --text-secondary: #94a3b8;
-  --accent-blue: #3b82f6;
-  --accent-blue-hover: #2563eb;
-  --accent-purple: #8b5cf6;
+  /* Color Palette - Modern Enterprise (Stripe / Vercel style) */
+  --bg-app: #f8fafc; /* Crisp cool light slate */
+  --bg-sidebar: #ffffff; /* Crisp white sidebar */
+  --bg-card: #ffffff; /* Clean white card */
+  --border-color: #e2e8f0; /* Hairline border */
+  --text-primary: #0f172a; /* Deep charcoal */
+  --text-secondary: #475569; /* Slate gray text */
+  --accent-blue: #4f46e5; /* Royal Indigo */
+  --accent-blue-hover: #3730a3; /* Indigo hover */
+  --accent-purple: #7c3aed;
   --success: #10b981;
   --danger: #ef4444;
 
   /* Shadows & Effects */
-  --glass-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-  --glass-border: 1px solid rgba(255, 255, 255, 0.05);
+  --glass-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.05), 0 1px 2px -1px rgba(0, 0, 0, 0.05), 0 10px 15px -3px rgba(0, 0, 0, 0.03);
+  --glass-border: 1px solid #e2e8f0;
   
   /* Typography */
   --font-family: 'Inter', sans-serif;
@@ -49,11 +49,9 @@ p {
   line-height: 1.5;
 }
 
-/* Glassmorphism Card Utility */
+/* Card Utility */
 .glass-card {
   background: var(--bg-card);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
   border: var(--glass-border);
   border-radius: 16px;
   box-shadow: var(--glass-shadow);
@@ -95,7 +93,7 @@ p {
 }
 
 .btn-icon:hover {
-  background: rgba(255, 255, 255, 0.1);
+  background: rgba(0, 0, 0, 0.035);
   color: var(--text-primary);
 }
 
@@ -106,6 +104,7 @@ p {
   border-radius: 12px;
   border: var(--glass-border);
   background: var(--bg-card);
+  box-shadow: var(--glass-shadow);
 }
 
 table {
@@ -115,10 +114,10 @@ table {
 }
 
 th {
-  background-color: rgba(0, 0, 0, 0.2);
+  background-color: rgba(0, 0, 0, 0.015);
   color: var(--text-secondary);
-  font-weight: 500;
-  font-size: 13px;
+  font-weight: 600;
+  font-size: 12px;
   text-transform: uppercase;
   letter-spacing: 0.05em;
   padding: 16px 24px;
@@ -137,7 +136,7 @@ tr:last-child td {
 }
 
 tr:hover td {
-  background-color: rgba(255, 255, 255, 0.02);
+  background-color: rgba(0, 0, 0, 0.008);
 }
 
 /* Badges */
@@ -146,6 +145,9 @@ tr:hover td {
   border-radius: 9999px;
   font-size: 12px;
   font-weight: 500;
+  background: rgba(71, 85, 105, 0.08);
+  color: var(--text-secondary);
+  display: inline-block;
 }
 .badge.active {
   background: rgba(16, 185, 129, 0.1);
@@ -154,4 +156,8 @@ tr:hover td {
 .badge.warning {
   background: rgba(239, 68, 68, 0.1);
   color: var(--danger);
+}
+.badge.pending {
+  background: rgba(79, 70, 229, 0.1);
+  color: var(--accent-blue);
 }

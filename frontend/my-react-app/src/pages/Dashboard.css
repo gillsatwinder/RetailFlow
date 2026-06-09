@@ -62,10 +62,11 @@
 
 /* ===== Custom Chart Tooltip ===== */
 .chart-tooltip {
-  background: #0f172a;
-  border: 1px solid #334155;
+  background: #ffffff;
+  border: 1px solid var(--border-color);
   border-radius: 8px;
   padding: 10px 14px;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
 }
 
 .chart-tooltip-label {
@@ -75,7 +76,7 @@
 }
 
 .chart-tooltip-value {
-  color: #fff;
+  color: var(--text-primary);
   font-size: 14px;
   font-weight: 600;
 }
